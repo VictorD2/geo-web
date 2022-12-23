@@ -1,0 +1,240 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+html,
+body {
+  padding: 0;
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans,
+    Helvetica Neue, sans-serif;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+/* @layer base {
+  @font-face {
+    font-family: 'App-font';
+    font-weight: 200;
+    src: url('/fonts/Poppins-ExtraLight.ttf');
+  }
+  @font-face {
+    font-family: 'App-font';
+    font-weight: 300;
+    src: url('/fonts/Poppins-Light.ttf');
+  }
+  @font-face {
+    font-family: 'App-font';
+    font-weight: 400;
+    src: url('/fonts/Poppins-Regular.ttf');
+  }
+  @font-face {
+    font-family: 'App-font';
+    font-weight: 500;
+    src: url('/fonts/Poppins-Medium.ttf');
+  }
+  @font-face {
+    font-family: 'App-font';
+    font-weight: 600;
+    src: url('/fonts/Poppins-SemiBold.ttf');
+  }
+  @font-face {
+    font-family: 'App-font';
+    font-weight: 700;
+    src: url('/fonts/Poppins-Bold.ttf');
+  }
+  @font-face {
+    font-family: 'App-font';
+    font-weight: 800;
+    src: url('/fonts/Poppins-ExtraBold.ttf');
+  }
+  @font-face {
+    font-family: 'App-font';
+    font-weight: 900;
+    src: url('/fonts/Poppins-Black.ttf');
+  }
+} */
+
+@layer utilities {
+  .highlight-none {
+    -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+  }
+}
+
+.app-col {
+  @apply flex flex-col w-full;
+}
+
+.app-row {
+  @apply flex flex-row w-full;
+}
+.app-container {
+  @apply max-w-screen-xl mx-auto w-full;
+}
+.app-toolbar {
+  @apply max-w-screen-xl mx-auto w-full h-full flex justify-between items-center p-4 md:p-6;
+}
+.app-card {
+  @apply bg-white rounded-lg shadow-lg m-4 md:m-6;
+}
+
+.app-badge {
+  @apply absolute top-0 right-0 inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-red-100 transform translate-x-1/2 -translate-y-1/2 bg-red-600 rounded-full;
+}
+
+/* body {
+  @apply text-base;
+  font-family: 'App-font';
+  top: 0px !important;
+}
+
+.h1 {
+  @apply text-5xl font-light;
+  font-family: 'App-font';
+  letter-spacing: -1px;
+}
+.h2 {
+  @apply text-4xl font-light;
+  letter-spacing: -0.5px;
+  font-family: 'App-font';
+}
+.h3 {
+  @apply text-3xl font-normal;
+  letter-spacing: 0px;
+  font-family: 'App-font';
+}
+.h4 {
+  @apply text-2xl font-normal;
+  letter-spacing: 0.25px;
+  font-family: 'App-font';
+}
+.h5 {
+  @apply text-xl font-normal;
+  letter-spacing: 0px;
+  font-family: 'App-font';
+}
+.h6 {
+  @apply text-base font-medium;
+  letter-spacing: 0.15px;
+  font-family: 'App-font';
+}
+hr {
+  @apply border-t border-gray-400 border-solid;
+}
+
+.subtitle-1 {
+  @apply text-base;
+  letter-spacing: 0.15px;
+  font-family: 'App-font';
+}
+
+.subtitle-2 {
+  @apply font-medium;
+  letter-spacing: 0.15px;
+  font-family: 'App-font';
+}
+
+.body-1 {
+  @apply text-base;
+  letter-spacing: 0.5px;
+  font-family: 'App-font';
+}
+
+.body-2 {
+  @apply text-sm;
+  letter-spacing: 0.25px;
+  font-family: 'App-font';
+} */
+
+.button {
+  letter-spacing: 0.0892857143em;
+  /* font-family: 'App-font'; */
+}
+
+.caption {
+  font-size: 0.625rem;
+  letter-spacing: 0.4px;
+  /* font-family: 'App-font'; */
+}
+
+@media (min-width: 1024px) {
+  .sidebar_text:hover span {
+    display: block;
+  }
+  .sidebar_text .item_sidebar {
+    justify-content: flex-start !important;
+  }
+  .sidebar_text span {
+    display: none;
+  }
+  .sidebar_text .item_sidebar {
+    justify-content: flex-start;
+  }
+  .sidebar_text span {
+    display: block !important;
+  }
+}
+
+@media (min-width: 768px) {
+  .sidebar_text:hover .logo-lg {
+    display: block;
+  }
+  .sidebar_text:hover .logo-md {
+    width: 0px;
+  }
+  .sidebar_text span {
+    display: none;
+  }
+  .sidebar_text .item_sidebar {
+    justify-content: center;
+  }
+  .sidebar_text:hover .item_sidebar {
+    justify-content: flex-start;
+  }
+  .sidebar_text:hover span {
+    display: block;
+  }
+}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.loader-wrapper {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  z-index: 1;
+  background-color: red;
+}
+
+@-webkit-keyframes rotar {
+  100% {
+    transform: rotate(-360deg);
+  }
+}
+
+@keyframes rotar {
+  100% {
+    transform: rotate(-360deg);
+  }
+}
+
+.loginGlowing::after {
+  content: ' ';
+  background-image: conic-gradient(#63D7C4 20deg, transparent 120deg);
+  width: 150%;
+  animation: rotar 15s infinite linear;
+  height: 150%;
+  position: absolute;
+  top: -25%;
+  left: -25%;
+}
