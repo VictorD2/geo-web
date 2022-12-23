@@ -14,7 +14,7 @@ export const GlobalProvider = ({ children }: { children: JSX.Element }) => {
   const [file, setFile] = useState<File>();
   const [day, setDay] = useState<string>("Lunes");
   const [horaInicio, setHoraInicio] = useState<string>("07:00");
-  const [horaFin, setHoraFin] = useState<string>("12:00");
+  const [horaFin, setHoraFin] = useState<string>("23:58");
 
   const submitData = async () => {
     if (!file) return;
