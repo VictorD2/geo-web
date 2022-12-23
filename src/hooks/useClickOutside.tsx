@@ -1,6 +1,4 @@
-/* eslint-disable no-undef */
-/* eslint-disable @typescript-eslint/ban-types */
-/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { ReactNode, useEffect, useRef } from "react";
 
 interface Props {
