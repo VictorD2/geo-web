@@ -47,6 +47,21 @@ export const getColor = (numero: number) => {
     "#1c5a48",
     "#2f6302",
     "#e10b33",
+    "#b50a88",
+    "#9c3836",
+    "#0c2def",
+    "#b5d298",
+    "#b44ebc",
+    "#8fdfb8",
+    "#b4f283",
+    "#f7eab3",
+    "#faa5f4",
+    "#5b6d7a",
+    "#cf7a75",
+    "#95ee75",
+    "#914d12",
+    "#741adb",
+    "#91101e",
   ];
   return colors[numero];
 };
