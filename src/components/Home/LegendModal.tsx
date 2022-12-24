@@ -98,7 +98,7 @@ const LegendModal = () => {
           <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 w-10">
             {`${getTime(item[0].hora)} - ${getTime(
               item[item.length - 1].hora
-            )}}`}
+            )}`}
           </td>
           <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 w-10">
             {item[item.length - 1].RutaSimilar}
