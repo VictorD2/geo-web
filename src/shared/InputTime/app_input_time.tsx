@@ -51,6 +51,7 @@ const AppInputTime: React.FC<AppInputTimeProps> = (props) => {
     required = false,
     onChangeText,
   } = props;
+
   const classNames = (...classes: string[]): string => {
     return classes.filter(Boolean).join(" ");
   };

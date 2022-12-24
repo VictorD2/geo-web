@@ -17,7 +17,10 @@ export const GlobalProvider = ({ children }: { children: JSX.Element }) => {
   const [horaFin, setHoraFin] = useState<string>("23:58");
 
   const submitData = async () => {
-    if (!file) return;
+    if (!file) {
+      toast.warning("No ha seleccionado un archivo");
+      return;
+    }
     setLoading(true);
     const toastId = toast.loading("Por favor espere...");
     try {

@@ -5,13 +5,13 @@ class ClsGlobal {
   public static async sendData(formData: FormData): Promise<IPoint[]> {
     const { data } = await sendDataService(formData);
     const { datos } = data;
-    console.log(datos);
     const array_datos: IData[] = [];
+    
     for (let i = 0; i < datos.length; i++) {
       const element = datos[i];
-
       array_datos.push(JSON.parse(element));
     }
+    
     const puntos: IPoint[] = [];
     for (let i = 0; i < array_datos.length; i++) {
       const element = array_datos[i];
