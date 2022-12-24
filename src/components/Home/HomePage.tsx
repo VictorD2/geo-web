@@ -131,7 +131,7 @@ const HomePage = () => {
         <MapWithNoSSR />
       </div>
       <AppModal
-        width="lg:w-1/2 w-full"
+        width="lg:w-10/12 w-full"
         overflowClosed
         headerBgColor="bg-primary"
         headerText="Leyenda"
