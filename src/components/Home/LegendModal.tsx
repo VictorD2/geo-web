@@ -46,6 +46,7 @@ const LegendModal = () => {
     },
     { field: "hora", label: "Hora", orderBy: false, type: "string" },
     { field: "ruta", label: "Ruta", orderBy: false, type: "string" },
+    { field: "rutaSimilar", label: "Ruta Similar", orderBy: false, type: "string" },
     {
       field: "frecuencia",
       label: "Frecuencia",
@@ -99,6 +100,9 @@ const LegendModal = () => {
             {`${getTime(item[0].hora)} - ${getTime(
               item[item.length - 1].hora
             )}`}
+          </td>
+          <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 w-10">
+            {item[item.length - 1].Ruta}
           </td>
           <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 w-10">
             {item[item.length - 1].RutaSimilar}
