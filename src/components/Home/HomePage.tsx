@@ -20,6 +20,8 @@ const HomePage = () => {
     day,
     setHoraFin,
     setHoraInicio,
+    horaFin,
+    horaInicio,
   } = useGlobal();
 
   const [showLegend, setShowLegend] = useState<boolean>(false);
@@ -71,6 +73,7 @@ const HomePage = () => {
               width="lg:w-1/5 md:w-1/5 w-full"
               label="Hora Inicio"
               labelColor="text-white"
+              value={horaInicio}
               onChangeText={(e) => {
                 setHoraInicio(e);
               }}
@@ -79,6 +82,7 @@ const HomePage = () => {
               width="lg:w-1/5 md:w-1/5 w-full"
               label="Hora Fin"
               labelColor="text-white"
+              value={horaFin}
               onChangeText={(e) => {
                 setHoraFin(e);
               }}

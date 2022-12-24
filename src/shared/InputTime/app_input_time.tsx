@@ -25,6 +25,7 @@ interface AppInputTimeProps extends DivAttributes {
   id?: string;
   shadowColor?: string;
   disabled?: boolean;
+  value?: string;
 }
 
 const AppInputTime: React.FC<AppInputTimeProps> = (props) => {
@@ -49,6 +50,7 @@ const AppInputTime: React.FC<AppInputTimeProps> = (props) => {
     helpTextClassname = "",
     disabled = false,
     required = false,
+    value = "00:00",
     onChangeText,
   } = props;
 
@@ -77,8 +79,8 @@ const AppInputTime: React.FC<AppInputTimeProps> = (props) => {
     return numero.length === 1 ? `0${numero}` : numero;
   };
 
-  const [hour, setHour] = useState<string>("00");
-  const [minute, setMinute] = useState<string>("00");
+  const [hour, setHour] = useState<string>(value?value.split(":")[0]:"00");
+  const [minute, setMinute] = useState<string>(value?value.split(":")[1]:"00");
   const [open, setOpen] = useState<boolean>(false);
   const isRow = orientation === "horizontal";
   return (
