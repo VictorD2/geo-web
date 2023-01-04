@@ -2,8 +2,8 @@ import { IData, IGlobalResponse, IPoint } from "@interfaces/global.interface";
 import { sendDataService } from "@services/global.service";
 
 class ClsGlobal {
-  public static async sendData(formData: FormData): Promise<IPoint[]> {
-    const { data } = await sendDataService(formData);
+  public static async sendData(): Promise<IPoint[]> {
+    const { data } = await sendDataService();
     const { datos } = data;
     const array_datos: IData[] = [];
     

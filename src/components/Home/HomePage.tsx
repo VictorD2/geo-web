@@ -1,28 +1,33 @@
-import React, { useState } from "react";
-import dynamic from "next/dynamic";
+/* eslint-disable react-hooks/exhaustive-deps */
 import { MapIcon } from "@heroicons/react/24/outline";
+import React, { useEffect, useState } from "react";
+import { useRouter } from "next/router";
+import dynamic from "next/dynamic";
+import { initialStateUser } from "@interfaces/user.interface";
+import AppInputTime from "@shared/InputTime/app_input_time";
+import LegendModal from "@components/Home/LegendModal";
 import { useGlobal } from "@contexts/global.context";
 import AppButton from "@shared/Button/app_button";
-import AppSelect from "@shared/Select/app_select.";
-import AppInputTime from "@shared/InputTime/app_input_time";
+import AppSelect from "@shared/Select/app_select";
 import AppModal from "@shared/Modal/app_modal";
-import LegendModal from "./LegendModal";
-
-type ChangeEvent = React.ChangeEvent<HTMLInputElement>;
+import ClsAuth from "@class/ClsAuth";
+import ClsGlobal from "@class/ClsGlobal";
 
 const HomePage = () => {
   const {
-    loadData,
-    loading,
-    setFile,
-    submitData,
-    setDay,
-    day,
-    setHoraFin,
     setHoraInicio,
-    horaFin,
+    setLoadData,
+    setHoraFin,
     horaInicio,
+    setPoints,
+    loadData,
+    horaFin,
+    setUser,
+    setDay,
+    user,
+    day,
   } = useGlobal();
+  const router = useRouter();
 
   const [showLegend, setShowLegend] = useState<boolean>(false);
 
@@ -30,113 +35,110 @@ const HomePage = () => {
     ssr: false,
   });
 
-  const handleChangeInputFile = (e: ChangeEvent) => {
-    if (e.target.files && e.target.files.length !== 0) {
-      setFile(e.target.files[0]);
-    }
-  };
-
   const classNames = (...classes: string[]): string => {
     return classes.filter(Boolean).join(" ");
   };
 
+  const getData = async () => {
+    setLoadData(false);
+    const res = await ClsGlobal.sendData();
+    setPoints(res);
+    setLoadData(true);
+  };
+
+  useEffect(() => {
+    getData();
+    return () => {};
+  }, []);
+
   return (
     <main className="w-full h-screen">
-      <div
-        className={classNames(
-          "w-full bg-primary  flex items-center",
-          loadData ? "lg:h-32 md:h-32 h-96" : "h-20"
-        )}
-      >
-        {loadData ? (
-          <div className="flex lg:flex-row md:flex-row flex-col px-10 pt-2 pb-4 lg:gap-4 md:gap-4 gap-0 w-full items-center h-full">
-            <AppSelect
-              label="Día"
-              labelColor="text-white"
-              items={[
-                "Lunes",
-                "Martes",
-                "Miercoles",
-                "Jueves",
-                "Viernes",
-                "Sabado",
-              ]}
-              name="day"
-              onChange={(e) => {
-                console.log(e);
-                setDay(e);
-              }}
-              width="lg:w-1/5 md:w-1/5 w-full lg:pb-6 md:pb-6 pb-3"
-              selected={day}
-            />
-            <AppInputTime
-              width="lg:w-1/5 md:w-1/5 w-full"
-              label="Hora Inicio"
-              labelColor="text-white"
-              value={horaInicio}
-              onChangeText={(e) => {
-                setHoraInicio(e);
-              }}
-            />
-            <AppInputTime
-              width="lg:w-1/5 md:w-1/5 w-full"
-              label="Hora Fin"
-              labelColor="text-white"
-              value={horaFin}
-              onChangeText={(e) => {
-                setHoraFin(e);
-              }}
-            />
+      <div className={classNames("w-full bg-primary flex items-center ")}>
+        <div className="flex lg:flex-row md:flex-row flex-col px-10 pt-2 pb-4 lg:gap-4 md:gap-4 gap-0 w-full items-center h-full shadow-2xl shadow-white">
+          <AppSelect
+            width="lg:w-1/5 md:w-1/5 w-full lg:pb-6 md:pb-6 pb-3"
+            labelColor="text-white"
+            label="Día"
+            name="day"
+            items={[
+              "Lunes",
+              "Martes",
+              "Miercoles",
+              "Jueves",
+              "Viernes",
+              "Sabado",
+            ]}
+            onChange={(e) => {
+              setDay(e);
+            }}
+            selected={day}
+          />
+          <AppInputTime
+            width="lg:w-1/5 md:w-1/5 w-full"
+            labelColor="text-white"
+            label="Hora Inicio"
+            value={horaInicio}
+            onChangeText={(e) => {
+              setHoraInicio(e);
+            }}
+          />
+          <AppInputTime
+            width="lg:w-1/5 md:w-1/5 w-full"
+            labelColor="text-white"
+            label="Hora Fin"
+            value={horaFin}
+            onChangeText={(e) => {
+              setHoraFin(e);
+            }}
+          />
 
-            <AppButton
-              text="Ver Leyenda"
-              width="lg:w-1/5 md:w-1/5 w-full mt-5"
-              textColor="text-white font-bold"
-              remixicon="ri-map-2-line"
-              bgColor="bg-secondary"
-              onClick={() => {
-                setShowLegend(true);
-              }}
-            />
-          </div>
-        ) : (
-          <div className="lg:w-1/4 md:w-1/2 sm:w-full w-full flex items-center h-full px-4 gap-2">
-            <input
-              onChange={handleChangeInputFile}
-              type="file"
-              className="bg-white w-full"
-            />
-            <AppButton
-              onClick={submitData}
-              loading={loading}
-              disabled={loading}
-              text="Enviar"
-              textColor="text-white font-bold"
-              width="w-40"
-              borderColor="border-white"
-              remixicon="ri-send-plane-line"
-            />
-          </div>
-        )}
+          <AppButton
+            width="lg:w-1/5 md:w-1/5 w-full mt-5"
+            textColor="text-white font-bold"
+            remixicon="ri-map-2-line"
+            bgColor="bg-secondary"
+            text="Ver Leyenda"
+            onClick={() => {
+              setShowLegend(true);
+            }}
+          />
+          <AppButton
+            width="lg:w-1/5 md:w-1/5 w-full mt-5"
+            textColor="text-white font-bold"
+            remixicon="ri-logout-box-r-line"
+            bgColor="bg-primary"
+            text="Salir"
+            onClick={() => {
+              ClsAuth.logout();
+              setPoints([]);
+              setUser(initialStateUser);
+              router.push("/");
+            }}
+          />
+        </div>
       </div>
-      <div
-        id="map"
-        className={classNames(
-          loadData
-            ? "lg:h-[calc(100vh-8rem)] md:h-[calc(100vh-8rem)] h-[calc(100vh-8rem)]"
-            : "h-[calc(100vh-5rem)]",
-          "w-full"
-        )}
-      >
-        <MapWithNoSSR />
-      </div>
+      {loadData && (
+        <div id="map" className={classNames("h-[calc(100vh-5rem)]", "w-full")}>
+          <MapWithNoSSR />
+        </div>
+      )}
+      {!loadData && (
+        <div
+          className={classNames("h-[calc(100vh-5rem)]", "w-full bg-primary")}
+        >
+          <div className="w-full h-full app-row justify-center items-center p-6 bg-primary">
+            <div className="relative rounded-full bg-primary animate-spin h-56 w-56 border-8 border-b-secondary border-t-secondary border-l-primary border-r-primary" />
+            <div className="absolute uppercase text-white">Cargando Información</div>
+          </div>
+        </div>
+      )}
       <AppModal
-        width="lg:w-10/12 w-full"
-        overflowClosed
         headerBgColor="bg-primary"
-        headerText="Leyenda"
+        width="lg:w-10/12 w-full"
+        headerText={`Leyenda de ${user.name}`}
         IconHeader={MapIcon}
         open={showLegend}
+        overflowClosed
         onClose={() => {
           setShowLegend(false);
         }}

@@ -1,11 +1,11 @@
-import React from "react";
+import "leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.css";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
+import { useGlobal } from "@contexts/global.context";
+import { getColor, getTime } from "@utils/helpers";
+import "leaflet-defaulticon-compatibility";
 import "leaflet/dist/leaflet.css";
 import Leaflet from "leaflet";
-import "leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.css";
-import "leaflet-defaulticon-compatibility";
-import { useGlobal } from "@contexts/global.context";
-import { getColor, getTime } from "@src/utils/helpers";
+import React from "react";
 
 const Mapa = () => {
   const { points, day, horaFin, horaInicio } = useGlobal();
@@ -18,20 +18,21 @@ const Mapa = () => {
   const getIcon = (numero: number) => {
     const markerHtmlStyles = `
     background-color: ${getColor(numero)};
-    width: 2rem;
-    height: 2rem;
-    display: block;
-    left: -1rem;
-    top: -1rem;
-    position: relative;
     border-radius: 3rem 3rem 0;
     transform: rotate(45deg);
-    border: 1px solid #FFFFFF`;
+    border: 1px solid #FFFFFF;
+    position: relative;
+    display: block;
+    height: 2rem;
+    width: 2rem;
+    left: -1rem;
+    top: -1rem;
+    `;
     const icon = Leaflet.divIcon({
-      className: "my-custom-pin",
-      iconAnchor: [0, 24],
-      popupAnchor: [0, -36],
       html: `<span style="${markerHtmlStyles}" />`,
+      className: "my-custom-pin",
+      popupAnchor: [0, -36],
+      iconAnchor: [0, 24],
     });
     return icon;
   };

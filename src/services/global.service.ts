@@ -5,10 +5,17 @@ import { API } from "@config/config";
 const api = API + "/api/v1/archivo";
 
 // Service Send Data
-export const sendDataService = async (
-  data: FormData
-): Promise<AxiosResponse<IGlobalResponse, IGlobalResponse>> => {
-  return axios.post(`${api}`, data, {
-    headers: { "Content-Type": "multipart/form-data" },
-  });
+export const sendDataService = async (): Promise<
+  AxiosResponse<IGlobalResponse, IGlobalResponse>
+> => {
+  const token = localStorage.getItem("token");
+  return axios.post(
+    `${api}`,
+    {},
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }
+  );
 };

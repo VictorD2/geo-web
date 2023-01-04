@@ -1,59 +1,35 @@
 import React, { useContext, createContext, useState } from "react";
 import { IGlobalContext, IPoint } from "@interfaces/global.interface";
-import ClsGlobal from "@class/ClsGlobal";
-import { toast } from "react-toastify";
-import { toastConfig } from "@config/config";
-import { getErrorResponse } from "@src/utils/helpers";
+import { initialStateUser } from "@interfaces/user.interface";
 
 export const GlobalContext = createContext({} as IGlobalContext);
 
 export const GlobalProvider = ({ children }: { children: JSX.Element }) => {
+  const [horaInicio, setHoraInicio] = useState<string>("07:00");
+  const [horaFin, setHoraFin] = useState<string>("23:58");
   const [loadData, setLoadData] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
   const [points, setPoints] = useState<IPoint[]>([]);
-  const [file, setFile] = useState<File>();
+  const [user, setUser] = useState(initialStateUser);
   const [day, setDay] = useState<string>("Lunes");
-  const [horaInicio, setHoraInicio] = useState<string>("07:00");
-  const [horaFin, setHoraFin] = useState<string>("23:58");
-
-  const submitData = async () => {
-    if (!file) {
-      toast.warning("No ha seleccionado un archivo");
-      return;
-    }
-    setLoading(true);
-    const toastId = toast.loading("Por favor espere...");
-    try {
-      const formData = new FormData();
-      formData.append("file", file);
-      const response = await ClsGlobal.sendData(formData);
-      setPoints(response);
-      toast.update(toastId, toastConfig("Procesado correctamente", "success"));
-      setLoadData(true);
-    } catch (error) {
-      toast.update(toastId, toastConfig(getErrorResponse(error), "warning"));
-    }
-    setLoading(false);
-  };
 
   return (
     <GlobalContext.Provider
       value={{
-        loadData,
-        setLoadData,
-        file,
-        setFile,
-        loading,
-        setLoading,
-        submitData,
-        points,
-        setPoints,
-        day,
-        setDay,
-        horaInicio,
         setHoraInicio,
-        horaFin,
+        setLoadData,
+        setLoading,
+        horaInicio,
         setHoraFin,
+        setPoints,
+        loadData,
+        loading,
+        horaFin,
+        setUser,
+        points,
+        setDay,
+        user,
+        day,
       }}
     >
       {children}

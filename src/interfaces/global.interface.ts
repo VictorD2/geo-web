@@ -1,26 +1,26 @@
 import { Dispatch } from "react";
+import { IUser } from "@interfaces/user.interface";
 
 export interface IGlobalContext {
-  loadData: boolean;
-  setLoadData: Dispatch<boolean>;
-  file: File | undefined;
-  setFile: Dispatch<File | undefined>;
-  loading: boolean;
-  setLoading: Dispatch<boolean>;
-  submitData: () => Promise<void>;
-  points: IPoint[];
-  setPoints: Dispatch<IPoint[]>;
-  day: string;
-  setDay: Dispatch<string>;
-  horaInicio: string;
   setHoraInicio: Dispatch<string>;
-  horaFin: string;
+  setLoadData: Dispatch<boolean>;
+  setPoints: Dispatch<IPoint[]>;
+  setLoading: Dispatch<boolean>;
   setHoraFin: Dispatch<string>;
+  setDay: Dispatch<string>;
+  setUser: Dispatch<IUser>;
+  horaInicio: string;
+  loadData: boolean;
+  loading: boolean;
+  points: IPoint[];
+  horaFin: string;
+  day: string;
+  user: IUser;
 }
 
 export interface IGlobalResponse {
-  error?: string;
   succes?: string;
+  error?: string;
   datos: any[];
 }
 
@@ -29,11 +29,11 @@ export interface IData {
 }
 
 export interface IPoint {
-  Ruta: number;
   RutaSimilar: number;
-  dia: string;
-  hora: number;
-  index: number;
-  latitud: number;
   longitud: number;
+  latitud: number;
+  index: number;
+  Ruta: number;
+  hora: number;
+  dia: string;
 }

@@ -22,10 +22,12 @@
       "@interfaces/*": ["src/interfaces/*"],
       "@contexts/*": ["src/contexts/*"],
       "@hooks/*": ["src/hooks/*"],
+      "@schemas/*": ["src/schemas/*"],
       "@pages/*": ["src/pages/*"],
       "@services/*": ["src/services/*"],
       "@shared/*": ["src/shared/*"],
       "@layout/*": ["src/layout/*"],
+      "@utils/*": ["src/utils/*"],
       "@src/*": ["src/*"]
     }
   },

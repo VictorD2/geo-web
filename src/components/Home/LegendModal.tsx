@@ -1,14 +1,14 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { useGlobal } from "@contexts/global.context";
-import { IPoint } from "@interfaces/global.interface";
-import AppTable from "@shared/Table/app_table";
-import { getColor, getTime } from "@src/utils/helpers";
 import React, { useEffect, useState } from "react";
+import { getColor, getTime } from "@utils/helpers";
+import { IPoint } from "@interfaces/global.interface";
+import { useGlobal } from "@contexts/global.context";
+import AppTable from "@shared/Table/app_table";
 
 const LegendModal = () => {
-  const { points, day } = useGlobal();
   const [pointGroup, setPointGroup] = useState<IPoint[][]>([]);
   const [frecuency, setFrecuency] = useState<number[]>([]);
+  const { points, day } = useGlobal();
 
   const groupPoints = (puntos: IPoint[]) => {
     let rutaSimilar = 0;
@@ -46,7 +46,12 @@ const LegendModal = () => {
     },
     { field: "hora", label: "Hora", orderBy: false, type: "string" },
     { field: "ruta", label: "Ruta", orderBy: false, type: "string" },
-    { field: "rutaSimilar", label: "Ruta Similar", orderBy: false, type: "string" },
+    {
+      field: "rutaSimilar",
+      label: "Ruta Similar",
+      orderBy: false,
+      type: "string",
+    },
     {
       field: "frecuencia",
       label: "Frecuencia",
