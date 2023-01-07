@@ -4,11 +4,17 @@ import { getColor, getTime } from "@utils/helpers";
 import { IPoint } from "@interfaces/global.interface";
 import { useGlobal } from "@contexts/global.context";
 import AppTable from "@shared/Table/app_table";
+import AppButton from "@shared/Button/app_button";
+import AppModal from "@shared/Modal/app_modal";
+import TinyMap from "./TinyMap";
+import dynamic from "next/dynamic";
+import { MapIcon } from "@heroicons/react/24/outline";
 
 const LegendModal = () => {
   const [pointGroup, setPointGroup] = useState<IPoint[][]>([]);
   const [frecuency, setFrecuency] = useState<number[]>([]);
-  const { points, day } = useGlobal();
+  const { points, day, setPointsTiny, setShowTinyModal, showTinyModal } =
+    useGlobal();
 
   const groupPoints = (puntos: IPoint[]) => {
     let rutaSimilar = 0;
@@ -29,9 +35,17 @@ const LegendModal = () => {
     setFrecuency(frecuencias);
     setPointGroup(rutas);
   };
-
+  const TinyMap = dynamic(() => import("./TinyMap"), {
+    ssr: false,
+  });
   const TABLE_LABELS = [
     { field: "", label: "#", orderBy: false, type: "number" },
+    {
+      field: "verRuta",
+      label: "Ver Ruta",
+      orderBy: false,
+      type: "string",
+    },
     {
       field: "puntoInicio",
       label: "Punto Inicio",
@@ -78,6 +92,13 @@ const LegendModal = () => {
     </tr>
   );
 
+  const getPointTinyModal = (rutaSimilar: number) => {
+    const tinyRutas = pointGroup
+      .filter((itemR) => itemR.length !== 0)
+      .filter((ruta) => ruta[0].RutaSimilar === rutaSimilar);
+    return tinyRutas[0];
+  };
+
   const rows = pointGroup
     .filter((itemR) => itemR.length !== 0)
     .map((item, i) => {
@@ -92,6 +113,19 @@ const LegendModal = () => {
         >
           <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 w-10">
             {i}
+          </td>
+          <td className="px-6 py-4 whitespace-nowrap text-sm font-medium w-10">
+            <AppButton
+              onClick={() => {
+                setShowTinyModal(true);
+                setPointsTiny(getPointTinyModal(item[0].RutaSimilar));
+              }}
+              textColor="text-white"
+              width="w-24"
+              bgColor="bg-secondary"
+              text="Ver Ruta"
+              remixicon="ri-eye-line"
+            />
           </td>
           <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 w-10">
             {`${item[0].latitud} , ${item[0].longitud}`}
@@ -130,6 +164,20 @@ const LegendModal = () => {
   return (
     <div className="min-h-[20rem]">
       <AppTable columns={columns} count={rows.length} loading rows={rows} />
+      <AppModal
+        headerBgColor="bg-primary"
+        headerText="Ruta Recorrida"
+        IconHeader={MapIcon}
+        width="w-11/12"
+        open={showTinyModal}
+        onClose={() => {
+          setShowTinyModal(false);
+        }}
+      >
+        <div id="map2" className={"h-[calc(80vh)] w-full"}>
+          <TinyMap />
+        </div>
+      </AppModal>
     </div>
   );
 };

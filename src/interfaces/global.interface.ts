@@ -2,6 +2,8 @@ import { Dispatch } from "react";
 import { IUser } from "@interfaces/user.interface";
 
 export interface IGlobalContext {
+  setShowTinyModal: Dispatch<boolean>;
+  setPointsTiny: Dispatch<IPoint[]>;
   setHoraInicio: Dispatch<string>;
   setLoadData: Dispatch<boolean>;
   setPoints: Dispatch<IPoint[]>;
@@ -9,6 +11,8 @@ export interface IGlobalContext {
   setHoraFin: Dispatch<string>;
   setDay: Dispatch<string>;
   setUser: Dispatch<IUser>;
+  showTinyModal: boolean;
+  pointsTiny: IPoint[];
   horaInicio: string;
   loadData: boolean;
   loading: boolean;

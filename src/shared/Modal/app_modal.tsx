@@ -10,6 +10,7 @@ type AppModalProps = {
   onClose: Function;
   children: ReactNode;
   width?: string;
+  height?: string;
   overflowClosed?: boolean;
   xIcon?: boolean;
   headerBgColor?: string;
@@ -27,6 +28,7 @@ const AppModal = ({
   open,
   onClose,
   children,
+  height,
   width,
   overflowClosed,
 }: AppModalProps) => {
@@ -68,7 +70,7 @@ const AppModal = ({
             <div
               className={`inline-block bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 align-middle ${
                 headerText ? 'p-0' : 'p-4 md:p-6'
-              } ${width}`}
+              } ${width} ${height}`}
             >
               {/* Header */}
               {headerText && (

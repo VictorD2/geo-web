@@ -5,10 +5,12 @@ import { initialStateUser } from "@interfaces/user.interface";
 export const GlobalContext = createContext({} as IGlobalContext);
 
 export const GlobalProvider = ({ children }: { children: JSX.Element }) => {
+  const [showTinyModal, setShowTinyModal] = useState<boolean>(false);
   const [horaInicio, setHoraInicio] = useState<string>("07:00");
   const [horaFin, setHoraFin] = useState<string>("23:58");
   const [loadData, setLoadData] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
+  const [pointsTiny, setPointsTiny] = useState<IPoint[]>([]);
   const [points, setPoints] = useState<IPoint[]>([]);
   const [user, setUser] = useState(initialStateUser);
   const [day, setDay] = useState<string>("Lunes");
@@ -16,8 +18,12 @@ export const GlobalProvider = ({ children }: { children: JSX.Element }) => {
   return (
     <GlobalContext.Provider
       value={{
+        setShowTinyModal,
+        setPointsTiny,
+        showTinyModal,
         setHoraInicio,
         setLoadData,
+        pointsTiny,
         setLoading,
         horaInicio,
         setHoraFin,
